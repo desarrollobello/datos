@@ -1,0 +1,59 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ *
+ * @ingroup themeable
+ */
+#}
+<article{{ attributes }}>
+  {% if content %}
+  {% 
+    set data =  {
+        picture_uri: user.user_picture.0.entity.uri.value,
+        email: user.mail.0.value,
+        name: user.name.0.value,
+    }
+    %}
+
+    {% set image_user = {
+        '#theme': 'image_style',
+        '#style_name': 'thumbnail',
+        '#uri':data.picture_uri,
+        '#attributes': {class: 'img-element'}
+        } 
+    %}
+
+  <div class="section-author">
+    {% if data.picture_uri is not null %}
+    <div class="section-author__img-user">
+        {{image_user}}
+    </div>
+    {% else %}
+      {{ content.user_picture }}
+    {% endif %}
+    <div class="section-author__data">
+        <div>
+            <strong>Usuario:</strong> 
+            <span>{{data.name}}</span>
+        </div>
+        <div>
+            <strong>Email: </strong>
+            <span>{{data.email}}</span>
+        </div>
+    </div>
+  </div>
+  {% endif %}
+</article>

@@ -1,0 +1,111 @@
+$blue-gov: #3366cc;
+
+h1 {
+  font-size: 40px;
+  line-height: 48px;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+h4 {
+  font-size: 20px;
+  line-height: 30px;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.wrapper-image-logo-gov {
+  /*padding: 24px 0;*/
+}
+
+.menu-main-gov {
+  background-color: #F2F2F2;
+}
+
+.header-gov {
+  background-color: $blue-gov;
+  padding: 0 3rem;
+  height: 48px;
+}
+
+.title-footer-gov {
+  font-family: 'montserratsemibold', sans-serif;
+  color: #FFFFFF;
+  font-size: 1.12rem;
+}
+
+.data-portal-footer-gov {
+  font-family: 'work_sansregular', sans-serif;
+  font-size: 13px;
+  color: #FFFFFF;
+}
+
+.footer-gov {
+  background-color: $blue-gov;
+}
+
+.w-17 {
+  width: 17%;
+}
+
+.carousel-indicators .active {
+  background-color: orange;
+}
+
+.formats-format {
+  a {
+    color: #004884;
+    font-family: 'montserratmedium', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+  }
+}
+
+legend {
+  font-size: 1.2rem;
+  font-family: 'montserratsemibold', sans-serif;
+}
+
+.error {
+  border: 1px solid #B30937;
+}
+
+/**
+Estilos para formulario de inicio de sesión
+ */
+.page-title-gov {
+  font-family: 'montserratsemibold', sans-serif;
+  font-size: 42px;
+  color: #3366cc;
+}
+
+.form-login-gov {
+  max-width: 460px;
+  background-color: #FFFFFF;
+  margin: 1rem auto;
+}
+
+/*
+Clase para textos de descripción
+*/
+
+.description{
+  font-family: work_sanssemibold, sans-serif;
+  font-size: 14px;
+}

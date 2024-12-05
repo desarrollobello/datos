@@ -1,0 +1,45 @@
+.nav-mobile {
+  .list-mobile {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: 'work_sansmedium', sans-serif;
+    font-size: 14px;
+    overflow-y: auto;
+
+    .list-mobile__item {
+      padding: 0;
+      margin: 0;
+
+      .list-mobile__link {
+        display: flex;
+        padding: 15px 24px;
+        color: #4B4B4B;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #004884;
+          color: #FFFFFF;
+          font-family: 'work_sanssemibold', sans-serif;
+        }
+
+        .arrow {
+          margin-left: auto;
+          transform: rotate(90deg);
+        }
+
+       /* &.list-mobile__link {
+          display: flex;
+        }*/
+      }
+
+      .list__show {
+        list-style: none;
+        padding: 0 24px;
+        height: 0;
+        overflow: hidden;
+        transition: height 0.4s;
+      }
+    }
+  }
+}

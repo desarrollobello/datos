@@ -1,0 +1,23 @@
+name: Discovery
+type: theme
+base theme: false
+description: Tema con bootstrap drupal 10
+package: Bello
+core_version_requirement: ^10
+libraries:
+  - discovery/global
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  menuoffcanvas: 'Menu principal fuera de lienzo'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  featured: 'Featured'
+  breadcrumb: 'Breadcrumb'
+  content: 'Content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'
+  messages: 'Mensajes de la aplicación'
+  tasks: 'Region para navegación de tareas'

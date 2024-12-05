@@ -1,0 +1,53 @@
+{% if slider %}
+{%
+ set items = slider|length
+%}
+<div>
+  <div id="bello-slider" class="carousel slide" data-bs-touch="true" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for data in 0..items-1 %}
+        {% if data == 0 %}
+          <button type="button" data-bs-target="#bello-slider" data-bs-slide-to="{{ data }}" class="active" aria-current="true" aria-label="Slide {{ data }}"></button>
+        {% else %}
+          <button type="button" data-bs-target="#bello-slider" data-bs-slide-to="{{ data }}" aria-current="true" aria-label="Slide {{ data }}"></button>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="carousel-inner">
+      {% for data in slider %}
+        {% if loop.index0 == 0 %}
+          <div class="carousel-item active position-relative" data-bs-interval="7000" style="background-color: black;">
+            <a href="{{ data.link }}" class="text-decoration-none">
+              <img src="{{ file_url(data.pathImage) }}" class="d-block w-100" alt="{{ data.title }}" style="opacity: {{ data.opacity }}">
+            </a>
+            <h2 class="position-absolute top-50 start-50 translate-middle text-center" >
+              <a href="{{ data.link }}" style="color: #E8EFFC" class="text-decoration-none">
+                {{ data.title }}
+              </a>
+            </h2>
+          </div>
+        {% else %}
+          <div class="carousel-item position-relative" style="background-color: black;">
+            <a href="{{ data.link }}" class="text-decoration-none">
+              <img src="{{ file_url(data.pathImage) }}" class="d-block w-100" alt="{{ data.title }}" style="opacity: {{ data.opacity }}">
+            </a>
+            <h2 class="position-absolute top-50 start-50 translate-middle text-center">
+              <a href="{{ data.link }}" class="text-decoration-none" style="color: #E8EFFC">
+                {{ data.title }}
+              </a>
+            </h2>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bello-slider" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bello-slider" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+{% endif %}

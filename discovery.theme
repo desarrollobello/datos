@@ -1,0 +1,216 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the discovery theme.
+ */
+
+use Drupal\Core\Menu\MenuTreeParameters;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function discovery_preprocess_html(&$variables) {
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function discovery_preprocess_page(&$variables): void {
+
+  /**
+   * Validación para regiones
+   */
+  $sidebar_first = empty($variables['page']['sidebar_first']);
+  $sidebar_second = empty($variables['page']['sidebar_second']);
+  $content = empty($variables['page']['content']);
+
+  $variables['sidebar_first'] = $sidebar_first;
+  $variables['sidebar_second'] = $sidebar_second;
+  $variables['element_content'] = $content;
+
+  /**
+   * Renderizando menú para equipos móviles y equipos de escritorio
+   */
+  $variables['menu_mobile'] = _render_menu_mobile();
+  $variables['menu_desktop'] = _render_menu_desktop();
+
+  /**
+   * Elementos para el deslizador de imágenes del inicio del sitio
+   */
+
+  if (
+    Drupal::hasService('bello_slider.bello_slide_data')
+    &&
+    $variables['is_front']
+  ) {
+    $variables['slider'] = _render_slider();
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for node.html.twig.
+ */
+function discovery_preprocess_node(&$variables) {
+
+}
+
+function discovery_form_alter(&$form, FormStateInterface $form_state, $form_id): void {
+
+  if ($form_id === 'user_login_form') {
+    unset($form['pass']['#description']);
+    $form['pass']['#placeholder'] = '**********';
+    unset($form['name']['#description']);
+    $form['name']['#placeholder'] = 'Ejemplo: John';
+    $form['#attributes']['class'][] = 'form-login-gov';
+    $form['title_user_session_gov'] = [
+      '#type' => 'markup',
+      '#markup' => "<h2 class='page-title-gov'>Inicio de Sesión</h2>",
+      '#weight' => -1
+    ];
+  }
+}
+
+function discovery_theme_suggestions_page_title_alter(
+  array &$suggestions,
+  array $variables
+): void {
+  //  $current_path = \Drupal::service('path.current')->getPath();
+  $url = \Drupal\Core\Url::fromRoute('<current>');
+  if ($url->toString() === '/user/login') {
+    $suggestions[] = 'page_title__user_session';
+  }
+}
+
+function _render_menu_mobile($name = 'main'): string {
+  $menu_tree = \Drupal::menuTree();
+  // Build the typical default set of menu tree parameters.
+  $parameters = new MenuTreeParameters();
+  $parameters->maxDepth = 2;
+  $parameters->onlyEnabledLinks();
+  // Load the tree based on this set of parameters.
+  $tree = $menu_tree->load($name, $parameters);
+
+  // Transform the tree using the manipulators you want.
+  $manipulators = [
+    array('callable' => 'menu.default_tree_manipulators:generateIndexAndSort'),
+  ];
+
+  $tree = $menu_tree->transform($tree, $manipulators);
+
+  $data_menu = $menu_tree->build($tree);
+
+  $items = $data_menu['#items'];
+
+  $menu_main = "<nav class='nav-mobile'><ul class='list-mobile'>";
+
+  $level = 0;
+
+  foreach ($items as $index => $element) {
+    $title = $element['title'];
+    $link = $element['original_link']->getUrlObject()->toString();
+    $nolink = empty($link) ? 'nolink' : '';
+    $below = $element['below'];
+
+    if ($level === 0 && empty($below)) {
+      $menu_main .= "<li class='list-mobile__item'><a href='{$link}' class='list-mobile__link {$nolink}'>{$title}</a></li>";
+    }elseif ($level === 0 && !empty($below)) {
+      $menu_main .= "<li class='list-mobile__item'><a href='#' class='list-mobile__link list-mobile__link--click'><span>$title</span><span class='arrow'> <i class='bi bi-caret-right-fill'></i></span></a>";
+      $menu_main .= "<ul class='list__show'>";
+      foreach ($below as $i => $elements) {
+        $title_sub = $elements['title'];
+        $link_sub = $elements['original_link']->getUrlObject()->toString();
+        $nolink_sub = empty($link_sub) ? 'nolink' : '';
+        $menu_main .= "<li class='list__inside'>";
+        $menu_main .= "<a class='list-mobile__link list-mobile__link--inside {$nolink_sub}' href='{$link_sub}'>$title_sub</a>";
+        $menu_main .= "</li>";
+      }
+      $menu_main .= "</ul>";
+
+      $menu_main .= "</li>";
+    }
+  }
+
+  $menu_main .= "</ul></nav>";
+
+  return $menu_main;
+}
+
+function _render_menu_desktop( $name = 'main'): string {
+  $menu_tree_desktop = \Drupal::menuTree();
+  // Build the typical default set of menu tree parameters.
+  $parameters = new MenuTreeParameters();
+  $parameters->maxDepth = 2;
+  $parameters->onlyEnabledLinks();
+  // Load the tree based on this set of parameters.
+  $tree = $menu_tree_desktop->load($name, $parameters);
+
+  // Transform the tree using the manipulators you want.
+  $manipulators = [
+    array('callable' => 'menu.default_tree_manipulators:generateIndexAndSort'),
+  ];
+
+  $tree = $menu_tree_desktop->transform($tree, $manipulators);
+
+  $data_menu = $menu_tree_desktop->build($tree);
+
+  $items = $data_menu['#items'];
+
+  $menu_main = "<ul class='list-menu-desktop'>";
+
+  $level = 0;
+
+  foreach ($items as $index => $element) {
+    $title = $element['title'];
+    $link = $element['original_link']->getUrlObject()->toString();
+    $nolink = empty($link) ? 'nolink' : '';
+    $below = $element['below'];
+
+    if ($level === 0 && empty($below)) {
+      $menu_main .= "<li class='list-menu-desktop__item'><a href='{$link}' class='list-menu-desktop__link {$nolink}'>{$title}</a></li>";
+    }elseif ($level === 0 && !empty($below)) {
+      $menu_main .= "<li class='list-menu-desktop__item'><a href='#' class='list-menu-desktop__link list-menu-desktop__show'>$title<span class='arrow-desk'><i class='bi bi-caret-right-fill'></i></span></a>";
+      $menu_main .= "<ul class='list-menu-sub'>";
+      foreach ($below as $i => $elements) {
+        $title_sub = $elements['title'];
+        $link_sub = $elements['original_link']->getUrlObject()->toString();
+        $nolink_sub = empty($link_sub) ? 'nolink' : '';
+        $menu_main .= "<li class='list-menu-sub__item'>";
+        $menu_main .= "<a class='list-menu-sub__link {$nolink_sub}' href='{$link_sub}'>$title_sub</a>";
+        $menu_main .= "</li>";
+      }
+      $menu_main .= "</ul>";
+
+      $menu_main .= "</li>";
+    }
+  }
+
+  $menu_main .= "</ul>";
+
+  return $menu_main;
+
+}
+
+/**
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
+ */
+function _render_slider():array {
+  $service_slider = Drupal::service('bello_slider.bello_slide_data');
+  $data_slider = $service_slider->getActiveListSlide();
+  $file = Drupal::entityTypeManager()->getStorage('file');
+
+  $slider_info = [];
+  foreach ($data_slider as $key => $data) {
+    $file_load = $file->load($data->fid);
+    $slider_info[] = [
+      'pathImage' => $file_load->getFileUri(),
+      'title' => $data->title,
+      'link' => $data->link,
+      'opacity' => $data->opacity
+    ];
+  }
+  return $slider_info;
+}

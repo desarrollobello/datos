@@ -1,0 +1,39 @@
+.list-message{
+  list-style: none;
+  margin-top: 1rem;
+  font-size: 16px;
+  font-family: 'montserratsemibold', sans-serif;
+
+}
+.alert-error-gov {
+  background-color: #EECDD2;
+  color: #B30937;
+  border: 1px solid #B30937;
+  box-shadow: 0 0 1px rgba(179, 9, 55, 0.14);
+  @media (min-width: 769px) {
+    width: 750px;
+    margin: 1rem auto;
+  }
+}
+
+.alert-success-gov {
+  background-color: #CDE6DF;
+  color: #0D684B;
+  border: 1px solid #0D684B;
+  box-shadow: 0 0 1px rgba(13, 104, 75, 0.14);
+  @media (min-width: 769px) {
+    width: 750px;
+    margin: 1rem auto;
+  }
+}
+
+.alert-info-gov {
+  background-color: #F6F8F9;
+  color: #3366cc;
+  border: 1px solid #3366cc;
+  box-shadow: 0 0 1px rgba(51, 102, 204, 0.14);
+  @media (min-width: 769px) {
+    width: 750px;
+    margin: 1rem auto;
+  }
+}

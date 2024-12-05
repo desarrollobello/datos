@@ -1,0 +1,36 @@
+/*$primary:       $blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-100 !default;
+$dark:          $gray-900 !default;*/
+
+$font-family-sans-serif: 'work_sansregular', sans-serif;
+$headings-font-family: 'montserratsemibold', sans-serif;
+$nav-link-padding-y: 1rem;
+$nav-link-font-size: 14px;
+
+$carousel-control-color: #3366cc;
+$carousel-control-opacity: 1;
+$carousel-control-hover-opacity: 1;
+$carousel-indicator-opacity: 1;
+$carousel-control-icon-width: 5rem;
+$carousel-indicator-active-bg: #3366cc;
+$carousel-indicator-height: 5px;
+$offcanvas-bg-color: #f2f2f2;
+
+//Estilos de input
+$input-placeholder-color: rgba(0,0,0,0.3);
+$input-border-color: #737373;
+$input-padding-x: 5px;
+$input-focus-border-color: #3366cc;
+$input-focus-box-shadow: 0 0 5px rgba(51, 102, 204, 0.14);
+$input-placeholder-color: #737373;
+$input-font-family: 'work_sansmedium', sans-serif;
+$input-font-size: 16px;
+$input-height: 40px;
+
+//Estilos de select
+$form-label-margin-bottom: 0;

@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ * Some may be blank but they are provided for consistency.
+ *
+ * @see template_preprocess_maintenance_page()
+ *
+ * @ingroup themeable
+ */
+#}
+<header role="banner" class="container mt-5 text-center">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card-gov">
+        <div class="card-head-gov">
+          {% if logo %}
+            <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">
+              <img src="{{ logo }}" alt="{{ 'Home'|t }}"/>
+            </a>
+          {% endif %}
+        </div>
+        {% if site_name or site_slogan %}
+          {% if site_name %}
+            <h1 class="card-title-gov mt-0 mb-0">
+              <a href="{{ front_page }}" title="{{ 'Home'|t }}" rel="home">{{ site_name }}</a>
+            </h1>
+          {% endif %}
+        {% endif %}
+        <div class="card-body-gov">
+          {{ page.content }}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</header>
+

@@ -1,0 +1,18 @@
+.section-author {
+    background-color: #f6f8f9;
+    padding: 0.5rem;
+    display: flex;
+    .section-author__img-user {
+        .img-element {
+            border-radius: 7px;
+            max-width: none !important;
+        }
+    }
+    .section-author__data{
+        padding: 0.5rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+    }
+}
